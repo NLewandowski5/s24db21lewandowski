@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  - var image_names = ["elephantgrey.jpg", "elephantblack.jpg", "tiger.jpg", "lioness.jpg", "lion.jpg"]
+
+  // Step 12: Add a loop that iterates 3 times
+  - for (let i = 0; i < 3; i++)
+    // Step 13: Generate a random value from 0 to 4 to get a name from image_names
+    - let randomIndex = Math.floor(Math.random() * image_names.length)
+    - let imageName = image_names[randomIndex]
+    
+    // Step 14: Create an img element with properties src, alt, height, and width
+    img(src=`/images/${imageName}`, alt=`${imageName}`, height='300', width='300')

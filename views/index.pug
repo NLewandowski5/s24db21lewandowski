@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} and this is some test text and this is some more.
+  button(type="button", class="btn btn-primary", onclick="double()") Press me
+  div#double Up the amount
+
+  // Java script
+  script.
+    let value = 0;
+    let power = 1;
+  
+    function double() {
+      value += 1;
+      power *= 2;
+      document.getElementById("double").innerText = `Two to the power ${value} is ${power}`;
+    }
+
+  // Add hyperlink
+  a(href="/animals") Go to Animals
