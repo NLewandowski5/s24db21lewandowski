@@ -42,7 +42,7 @@ db.once("open", function(){
 });
 
 // Call the recreateDB function to seed the database
-let reseed = true;
+let reseed = false;
 if (reseed) {
   recreateDB();
 }
