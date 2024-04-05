@@ -49,9 +49,28 @@ exports.animal_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Animal delete DELETE ' + req.params.id);
 };
 // Handle Animal update form on PUT.
-exports.animal_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Animal update PUT' + req.params.id);
-};
+exports.animal_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await Animal.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.species) toUpdate.species = req.body.species;
+    if(req.body.habitat) toUpdate.habitat = req.body.habitat;
+    if(req.body.population) toUpdate.population = req.body.population;
+
+    if(req.body.checkboxsale) toUpdate.sale = true;
+    else toUpdate.same = false;
+
+    let result = await toUpdate.save();
+    console.log("Success " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+    }
+    };
 
 // VIEWS
 // Handle a show all view
