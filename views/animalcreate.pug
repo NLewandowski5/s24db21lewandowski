@@ -1,0 +1,32 @@
+extends layout
+block content
+ h1= title
+ form(id='AnimalForm', action="/resource/animals", method="POST")
+  div.form-group
+    label.animalAttr(for='species') Animal species
+    input#species(type='text', name='species')
+  div.form-group
+    label.animalAttr(for='habitat') Animal habitat
+    input#habitat(type='text', name='habitat')
+  div.form-group
+    label.animalAttr(for='population') Animal population
+    input#population(type='number', name='population')
+  input(type="submit")
+
+ script.
+  document.forms['AnimalForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+     return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+      alert("Save succeded")
+      // TODO handle body
+    }).catch((error) => {
+      // TODO handle error
+      alert("Save failed " + error )
+    });
+   });

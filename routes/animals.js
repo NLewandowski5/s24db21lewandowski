@@ -8,4 +8,8 @@ router.get('/', animal_controllers.animal_view_all_Page);
 /* GET detail animal page */
 router.get('/detail', animal_controllers.animal_view_one_Page);
 
+/* GET create animal page */
+router.get('/create', animal_controllers.animal_create_Page);
+
+
 module.exports = router;
