@@ -45,9 +45,18 @@ exports.animal_create_post = async function(req, res) {
     };
 
 // Handle Animal delete from on DELETE.
-exports.animal_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Animal delete DELETE ' + req.params.id);
-};
+exports.animal_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Animal.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
 // Handle Animal update form on PUT.
 exports.animal_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body
