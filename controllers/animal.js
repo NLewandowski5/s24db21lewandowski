@@ -136,3 +136,16 @@ exports.animal_update_Page = async function(req, res) {
     }
    };
    
+// Handle a delete one view with id from query
+exports.animal_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Animal.findById(req.query.id)
+    res.render('animaldelete', { title: 'Animal Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };

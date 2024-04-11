@@ -14,4 +14,7 @@ router.get('/create', animal_controllers.animal_create_Page);
 /* GET create update page */
 router.get('/update', animal_controllers.animal_update_Page);
 
+/* GET delete animal page */
+router.get('/delete', animal_controllers.animal_delete_Page);
+
 module.exports = router;

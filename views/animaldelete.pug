@@ -1,0 +1,53 @@
+extends layout
+block content
+ h1= title
+ 
+ if (toShow == null)
+   h2 No instance to delete
+ else
+   - let animalid = toShow._id
+   - let animalspecies = toShow.species
+   - let animalhabitat = toShow.habitat
+   - let animalpopulation = toShow.population
+   - let actionid = "/resource/animals/" + animalid
+ 
+   script let actionid = "#{actionid}"
+   div
+     div.row
+       div(class='animalAttr mr-3') Animal ID is:
+       div #{animalid}
+     div.row
+       div(class='animalAttr mr-3') Animal Species is:
+       div #{animalspecies}
+     div.row
+       div(class='animalAttr mr-3') Animal Habitat is:
+       div #{animalhabitat}
+     div.row
+       div(class='animalAttr mr-3') Animal Population is:
+       div #{animalpopulation}
+ 
+ button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+ button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+ script.
+  function cancel() {
+   // Go back to the home page for the costume collection
+   window.location.href='/animals'
+  }
+ script.
+  function deleteOnid() {
+   console.log("starting delete")
+   // delete first
+   fetch(actionid, {
+    method: 'DELETE' // Don't need a body for the delete
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Delete succeded")
+    window.location.href='/animals'
+    // TODO handle body
+   }).catch((error) => {
+    // TODO handle error
+    alert("Delete failed " + error )
+   });
+  }
