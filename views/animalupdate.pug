@@ -1,10 +1,14 @@
 extends layout
 block content
  h1= title
- - let animalid = toShow._id
- - let animalspecies = toShow.species
- - let animalhabitat = toShow.habitat
- - let animalpopulation = toShow.population
+ 
+ if (toShow == null)
+   h2 No instance to update
+ else
+   - let animalid = toShow._id
+   - let animalspecies = toShow.species
+   - let animalhabitat = toShow.habitat
+   - let animalpopulation = toShow.population
 
  div.row(class='mb-2')
    div.mr-1 Animal ID is:
