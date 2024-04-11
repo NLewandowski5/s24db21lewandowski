@@ -1,24 +1,24 @@
 extends layout
 block content
- h1= title
- 
- if (toShow == null)
-   h2 No instance to display the details for
- else
-   - let animalid = toShow._id
-   - let animalspecies = toShow.species
-   - let animalhabitat = toShow.habitat
-   - let animalpopulation = toShow.population
-   div
-     div.row
-       div(class='animalAttr mr-3') Animal ID is:
-       div #{animalid}
-     div.row
-       div(class='animalAttr mr-3') Animal Species is:
-       div #{animalspecies}
-     div.row
-       div(class='animalAttr mr-3') Animal Habitat is:
-       div #{animalhabitat}
-     div.row
-       div(class='animalAttr mr-3') Animal Population is:
-       div #{animalpopulation}
+  h1= title
+  
+  if (toShow == null)
+    h2 No instance to display the details for
+  else
+    - let animalid = toShow._id
+    - let animalspecies = toShow.species
+    - let animalhabitat = toShow.habitat
+    - let animalpopulation = toShow.population
+    .animal-details-container
+      .animal-attribute
+        div Animal ID:
+        div #{animalid}
+      .animal-attribute
+        div Animal Species:
+        div #{animalspecies}
+      .animal-attribute
+        div Animal Habitat:
+        div #{animalhabitat}
+      .animal-attribute
+        div Animal Population:
+        div #{animalpopulation}

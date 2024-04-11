@@ -11,3 +11,24 @@ a {
   background-color: aquamarine;
   width: 120px;
  }
+
+.animal-details-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.animal-attribute {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.animal-attribute div {
+  font-weight: bold;
+}
+
+.animal-attribute div:nth-child(even) {
+  color: #00B7FF; /* Change color for even rows */
+}
