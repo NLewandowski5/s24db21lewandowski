@@ -1,0 +1,41 @@
+extends layout
+block content
+ h1= title
+ - let animalid = toShow._id
+ - let animalspecies = toShow.species
+ - let animalhabitat = toShow.habitat
+ - let animalpopulation = toShow.population
+
+ div.row(class='mb-2')
+   div.mr-1 Animal ID is:
+   div #{animalid}
+ - let actionid = "/resource/animals/" + animalid
+  form(id='AnimalForm', action= actionid, method="PUT")
+    div.form-group
+      label.animalAttr(for='species') Animal species
+      input#species(type='text', name='species', value= species )
+    div.form-group
+      label.animalAttr(for='habitat') Animal habitat
+      input#habitat(type='text', name='habitat', value= habitat )
+    div.form-group
+      label.animalAttr(for='population') Animal population
+      input#population(type='number', name='population', value= population )
+    input(type="submit")
+
+ script.
+  document.forms['AnimalForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+   // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'PUT',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+    alert("Update succeded")
+    // TODO handle body
+    }).catch((error) => {
+    // TODO handle error
+    alert("Update failed " + error )
+    });
+   });
