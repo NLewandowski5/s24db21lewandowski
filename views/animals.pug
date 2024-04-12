@@ -3,19 +3,18 @@ extends layout
 block content
   h1= title
 
-  -
-    let items = results
-
-  .container-fluid
-    .row
-     each animal, index in results
-      .col-sm-2(onclick=`buy(${index})`)
-        h3 #{animal.species}
-        p Habitat: #{animal.habitat}
-        p Population: #{animal.population}
   
-  script.
-    function buy(index) {
-      alert(`You purchased item ${index}`);
-    }
+  - let items = results
+
+  div(class="container-fluid")
+    div(class="row m-1")
+      each animal in items
+        - let destination = `dispatch(\"/animals/update?id=${animal._id}\")`
+        div(class="row-sm-2", class="m-1") Animal #{animal.species}(#{animal.habitat}) is #{animal.population}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+  
+    script.
+     function dispatch(path){
+      window.location.href=path
+     }
 
