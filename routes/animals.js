@@ -1,6 +1,22 @@
 var express = require('express');
 const animal_controllers= require('../controllers/animal');
 var router = express.Router();
+var passport = require('passport');
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  if(req.session.returnTo)
+    res.redirect(req.session.returnTo);  
+  res.redirect('/');
+});
+
+// A little function to check if we have an authorized user and continue on or
+// redirect to login.
+const secured = (req, res, next) => {
+ if (req.user){
+ return next();
+ }
+ res.redirect("/login");
+}
 
 /* GET animals page. */
 router.get('/', animal_controllers.animal_view_all_Page);
@@ -12,7 +28,7 @@ router.get('/detail', animal_controllers.animal_view_one_Page);
 router.get('/create', animal_controllers.animal_create_Page);
 
 /* GET create update page */
-router.get('/update', animal_controllers.animal_update_Page);
+router.get('/update', secured, animal_controllers.animal_update_Page);
 
 /* GET delete animal page */
 router.get('/delete', animal_controllers.animal_delete_Page);
