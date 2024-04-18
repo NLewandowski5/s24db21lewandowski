@@ -8,10 +8,19 @@ block content
 
   div(class="container-fluid")
     div(class="row m-1")
+      
+      // Button to navigate to the create page
+      div(class="row-sm-2", class="m-1")
+        button.btn.btn-primary.ml-1(onclick="dispatch('/animals/create')") Create New Animal
+      
       each animal in items
-        - let destination = `dispatch(\"/animals/update?id=${animal._id}\")`
+        - let updateDestination = `dispatch(\"/animals/update?id=${animal._id}\")`
+        - let detailDestination = `dispatch(\"/animals/detail?id=${animal._id}\")`
+        - let deleteDestination = `dispatch(\"/animals/delete?id=${animal._id}\")`
         div(class="row-sm-2", class="m-1") Animal #{animal.species}(#{animal.habitat}) is #{animal.population}
-          button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= updateDestination) Update
+          button.btn( class="btn-primary ml-1", onclick= detailDestination) Detail
+          button.btn( class="btn-primary ml-1", onclick= deleteDestination) Delete
   
     script.
      function dispatch(path){
