@@ -11,8 +11,9 @@ block content
    - let animalpopulation = toShow.population
 
  div.row(class='mb-2')
-   div.mr-1 Animal ID is:
-   div #{animalid}
+   div.mr-1 Animal ID is: 
+     div #{animalid}
+   
  - let actionid = "/resource/animals/" + animalid
   form(id='AnimalForm', action= actionid, method="PUT")
     div.form-group
