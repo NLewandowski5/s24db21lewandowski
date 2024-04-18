@@ -2,10 +2,14 @@ const mongoose = require("mongoose")
 const animalSchema = mongoose.Schema({
     species: {
         type: String,
+        minlength: 3,
+        maxlength: 50
     },
 
     habitat: {
         type: String,
+        minlength: 3,
+        maxlength: 50
     },
 
     population: {
